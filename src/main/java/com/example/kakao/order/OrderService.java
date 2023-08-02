@@ -51,7 +51,7 @@ public class OrderService {
     }
 
     @Transactional
-    public OrderResponse.findByIdDTO findById(int orderId, User sesssionUser) {
+    public OrderResponse.FindByIdDTO findById(int orderId, User sesssionUser) {
         Optional<Order> orderPS = orderJPARepository.findById(orderId);
         if (orderPS.isPresent()) {
             // 다른 유저의 주문 번호를 조회할 때 예외 처리
@@ -59,7 +59,7 @@ public class OrderService {
                 throw new Exception401("접근 권한이 없습니다.");
             }
             List<Item> itemListPS = itemJPARepository.mfindByOrderId(orderId);
-            return new OrderResponse.findByIdDTO(orderId, itemListPS);
+            return new OrderResponse.FindByIdDTO(orderId, itemListPS);
         }
         else {
             throw new Exception404("존재하지 않는 주문 번호입니다.");

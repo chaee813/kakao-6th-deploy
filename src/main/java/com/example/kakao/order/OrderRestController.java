@@ -30,7 +30,7 @@ public class OrderRestController {
     // /orders/{id}
     @GetMapping("/orders/{id}")
     public ResponseEntity<?> findById(@PathVariable int id, @AuthenticationPrincipal CustomUserDetails userDetails) {
-        OrderResponse.findByIdDTO responseDTOs = orderService.findById(id, userDetails.getUser());
+        OrderResponse.FindByIdDTO responseDTOs = orderService.findById(id, userDetails.getUser());
         ApiUtils.ApiResult<?> apiResult = ApiUtils.success(responseDTOs);
         return ResponseEntity.ok(apiResult);
     }
